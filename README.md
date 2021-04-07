@@ -10,7 +10,7 @@
 * [Design Patterns](#patterns)
 
 <p align="center">
-    <img src="/media/restaraunt-management.jfif" alt="Restaurant Management System">
+    <img src="/media/restaraunt-management.png" alt="Restaurant Management System">
     <br />
     Restaurant Management System
 </p>
