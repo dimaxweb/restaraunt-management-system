@@ -25,11 +25,8 @@ const table:Table = new Table();
 const customer: Customer = new Customer('20', 'Dmitry');
 
 
-
 const kitchen = new Kitchen();
 const waiter = kitchen.waiters[0];
-
-
 
 const dishes:Dish[] = generateDishes();
 console.log('dishes', dishes);

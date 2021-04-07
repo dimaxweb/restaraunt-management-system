@@ -16,10 +16,9 @@ export class Waiter extends Employee{
 
   createTableOrder(table:Table, menu:Menu, customers: Customer []): Order{
     let dishes =  new Array<Dish>();
-    customers.reduce( (dishes,customer:Customer) => {
-        return dishes.concat(customer.orderDishes(menu));
-    },dishes);
-
+    customers.forEach((customer:Customer)=>{
+      dishes = dishes.concat(customer.orderDishes(menu));
+    });
     return new Order(dishes, this,table);
   }
 

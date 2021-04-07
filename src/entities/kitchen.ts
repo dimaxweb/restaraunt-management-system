@@ -3,6 +3,8 @@ import {Waiter} from "./stuff/waiter";
 import {Order} from "./order";
 import {EmployeeStatus} from "./stuff/employee-status";
 import {Bill} from "./equipment/bill";
+import {generateChefs, generateWaiters} from "../util";
+
 
 export class Kitchen{
 
@@ -31,32 +33,13 @@ export class Kitchen{
   constructor( ){
    this.waitingOrdersQueque = new Array<Order>();
     this.completedOrdersQueque = new Array<Order>();
-    this._waiters = this.generateWaiters();
-    this._chefs = this.generateChefs();
+    this._waiters = generateWaiters();
+    this._chefs = generateChefs();
 
     this.poolWaitingOrders();
     this.poolCompletedOrders();
 
   }
-
-  public generateWaiters(): Array<Waiter>{
-    let waiters = new Array<Waiter>();
-    [0,1,2,3,4].forEach((i: number) => {
-      waiters.push(new Waiter(i.toString(), `waiter${i}`));
-    });
-    return waiters;
-
-  }
-
-  public generateChefs(): Array<Chef>{
-    let waiters = [];
-    [1].forEach((i: number) => {
-      waiters.push(new Chef(i.toString(), `chef${i}`));
-    });
-    return waiters;
-
-  }
-
 
    public notifyNewWaitingOrder(order: Order){
      this.waitingOrdersQueque.push(order);

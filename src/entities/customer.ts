@@ -1,5 +1,6 @@
 import {Menu} from "./equipment/menu";
 import {Dish} from "./equipment/dish";
+import {randomArrayItems} from "../util";
 
 export class Customer{
   get id(): string {
@@ -13,7 +14,7 @@ export class Customer{
   constructor(private _id: string , public _name: string){}
 
   orderDishes(menu: Menu): Dish[]{
-      let dishes = menu.dishes;
+      let dishes = randomArrayItems<Dish>(menu.dishes);
       return dishes;
   }
 
