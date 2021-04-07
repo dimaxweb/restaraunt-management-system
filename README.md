@@ -7,11 +7,7 @@
 * [Use Case Diagram](#use-case-diagram)
 * [Class Diagram](#class-diagram)
 * [Activity Diagrams](#activity-diagrams)
-* [Patterns](#code)
-
-A Restaurant Management System is a software built to handle all restaurant activities in an easy and safe manner. 
-This System will give the Restaurant management power and flexibility to manage the entire system from a single portal. 
-The system allows the manager to keep track of available tables in the system as well as the reservation of tables and bill generation.
+* [Design Patterns](#patterns)
 
 <p align="center">
     <img src="/media/restaraunt-management.jfif" alt="Restaurant Management System">
@@ -21,7 +17,15 @@ The system allows the manager to keep track of available tables in the system as
 
 ### System Requirements
 
-We will focus on the following set of requirements while designing the Restaurant Management System:
+We will focus on the following business goals and  set of requirements while designing the Restaurant Management System:
+
+Business goals :
+1. Restraunt system should serve orders as fast as possible , customer should wait minimal amount of time.
+2. The System should be flexible for change without need for changing the core functionality.
+   So in future if business owner will want to change menu , kitchen type , billing  - will be able to do it without changing the core.  
+
+
+Requirements 
 
 1. The restaurant will have different branches.
 2. Each restaurant branch will have a menu.
@@ -46,41 +50,16 @@ Here are the main Actors in our system:
 **Customer:** To view and work on an order.
 **System:** Mainly responsible for sending notifications about table reservations, cancellations, etc.
 
-Here are the top use cases of the Restaurant Management System:
-
-* **Add/Modify tables:** To add, remove, or modify a table in the system.
-* **Search tables:** To search for available tables for reservation.
-* **Place order:** Add a new order in the system for a table.
-* **Update order:** Modify an already placed order, which can include adding/modifying meals or meal items.
-* **Create a reservation:** To create a table reservation for a certain date/time for an available table.
-* **Cancel reservation:** To cancel an existing reservation.
-* **Check-in:** To let the guest check in for their reservation.
-* **Make payment:** Pay the check for the food.
 
 Here is the use case diagram of our Restaurant Management System:
 
 <p align="center">
-    <img src="/media-files/rms-use-case-diagram.svg" alt="Restaurant Management System Use Case Diagram">
+    <img src="/media/rms-use-case-diagram.svg" alt="Restaurant Management System Use Case Diagram">
     <br />
     Use Case Diagram for Restaurant Management System
 </p>
 
 ### Class Diagram
-
-Here is the description of the different classes of our Restaurant Management System:
-
-* **Restaurant:** This class represents a restaurant. Each restaurant has registered employees. The employees are part of the restaurant because if the restaurant becomes inactive, all its employees will automatically be deactivated.
-* **Branch:** Any restaurants can have multiple branches. Each branch will have its own set of employees and menus.
-* **Menu:** All branches will have their own menu.
-* **MenuSection and MenuItem:** A menu has zero or more menu sections. Each menu section consists of zero or more menu items.
-* **Table and TableSeat:** The basic building block of the system. Every table will have a unique identifier, maximum sitting capacity, etc. Each table will have multiple seats.
-* **Order:** This class encapsulates the order placed by a customer.
-* **Meal:** Each order will consist of separate meals for each table seat.
-* **Meal Item:** Each Meal will consist of one or more meal items corresponding to a menu item.
-* **Account:** We’ll have different types of accounts in the system, one will be a receptionist to search and reserve tables and the other, the waiter will place orders in the system.
-* **Notification:** Will take care of sending notifications to customers.
-* **Bill:** Contains different bill-items for every meal item.
-
 <p align="center">
     <img src="/media-files/rms-class-diagram.png" alt="Restaurant Management System Class Diagram">
     <br />
@@ -119,9 +98,14 @@ Here is the description of the different classes of our Restaurant Management Sy
     Activity Diagram for Restaurant Management System Cancel Reservation
 </p>
 
-### Code
+### Patterns
 
-Here is the high-level definition for the classes described above.
+User cases : 
+1.Waiter notify kitchen about new order
+2. Kitchen  
+
+
+
 
 
 

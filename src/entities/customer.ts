@@ -1,8 +1,9 @@
 import {Menu} from "./equipment/menu";
 import {Dish} from "./equipment/dish";
 import {randomArrayItems} from "../util";
+import {ICustomer} from "./interfaces/IRestraunt";
 
-export class Customer{
+export class Customer implements ICustomer{
   get id(): string {
     return this._id;
   }

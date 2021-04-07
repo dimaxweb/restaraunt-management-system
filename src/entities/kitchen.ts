@@ -3,10 +3,19 @@ import {Waiter} from "./stuff/waiter";
 import {Order} from "./order";
 import {EmployeeStatus} from "./stuff/employee-status";
 import {Bill} from "./equipment/bill";
-import {generateChefs, generateWaiters} from "../util";
+import {IKitchen, OrderCallback} from "./interfaces/IRestraunt";
+import {Menu} from "./equipment/menu";
+import {generateDishes} from "../util";
 
 
-export class Kitchen{
+export class Kitchen implements IKitchen{
+  get menu(): Menu {
+    return this._menu;
+  }
+
+  set menu(value: Menu) {
+    this._menu = value;
+  }
 
   get waiters(): Array<Waiter> {
     return this._waiters;
@@ -27,67 +36,44 @@ export class Kitchen{
 
   private  _waiters:Array<Waiter>;
   private _chefs: Array<Chef>;
-  waitingOrdersQueque:Array<Order>;
-  completedOrdersQueque:Array<Order>;
+  private _menu:Menu;
+  private waitingOrdersQueque:Array<Order>;
+  onOrderCompleted : OrderCallback;
 
   constructor( ){
-   this.waitingOrdersQueque = new Array<Order>();
-    this.completedOrdersQueque = new Array<Order>();
-    this._waiters = generateWaiters();
-    this._chefs = generateChefs();
-
-    this.poolWaitingOrders();
-    this.poolCompletedOrders();
-
+    this.waitingOrdersQueque = new Array<Order>();
+    this._menu = new Menu(  generateDishes());
   }
 
    public notifyNewWaitingOrder(order: Order){
      this.waitingOrdersQueque.push(order);
+     this.poolWaitingOrders();
    }
-
-  public notifyOrderCompleted(order: Order){
-    this.completedOrdersQueque.push(order);
-  }
 
    public poolWaitingOrders(){
-    do{
-         this._chefs.forEach((chef:Chef) =>{
-            if(chef.status  == EmployeeStatus.Free){
-              let waitingOrder = this.waitingOrdersQueque.pop();
-              console.log('waiting order', waitingOrder);
-              if(waitingOrder) {
-                chef.processOrder(waitingOrder).then((order: Order) => {
-                  console.log( 'completed', order);
-                  this.notifyOrderCompleted(order);
-                })
-              }
-            }
-         });
+    while(this.waitingOrdersQueque.length){
+      let freeChef = this._chefs.find((chef:Chef) => { return chef.status == EmployeeStatus.Free });
+      console.log('free chef' , freeChef);
+      if(freeChef){
+        let waitingOrder = this.waitingOrdersQueque.pop();
+        freeChef.status = EmployeeStatus.Busy;
+        freeChef.processOrder(waitingOrder).then((order: Order) => {
+          console.log(` ${freeChef.name} is finished working on the order`);
+          freeChef.status = EmployeeStatus.Free;
+          let bill = this.generateBill(order);
+          order.waiter.bringBillToTable(order, bill);
+          this.onOrderCompleted(order,bill);
+        })
+      }
+      else{
+        /**
+         * lets wait for free chef
+         */
+        setTimeout(this.poolWaitingOrders.bind(this), 1000);
+      }
     }
 
-    while(this.waitingOrdersQueque.length!=0);
-
-    setTimeout(this.poolWaitingOrders.bind(this), 1000);
-
    }
-
-   public poolCompletedOrders(){
-     do{
-       this.waiters.forEach((waiter:Waiter) =>{
-         if(waiter.status  == EmployeeStatus.Free){
-           let completedOrder = this.completedOrdersQueque.pop();
-           if(completedOrder){
-             let bill = this.generateBill(completedOrder);
-             waiter.bringBillToTable(completedOrder, bill);
-           }
-         }
-       });
-     }
-     while(this.completedOrdersQueque.length!=0)
-
-     setTimeout(this.poolCompletedOrders.bind(this), 1000);
-   }
-
    public generateBill(order: Order): Bill{
      let bill = new Bill();
      bill.dishes = order.dishes;

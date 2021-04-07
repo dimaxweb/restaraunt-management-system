@@ -7,7 +7,8 @@ class Waiter extends employee_1.Employee {
     constructor(id, name) {
         super(id, name);
     }
-    createTableOrder(table, menu, customers) {
+    createTableOrder(table, menu) {
+        let customers = table.customers;
         let dishes = new Array();
         customers.forEach((customer) => {
             dishes = dishes.concat(customer.orderDishes(menu));
@@ -15,11 +16,9 @@ class Waiter extends employee_1.Employee {
         return new order_1.Order(dishes, this, table);
     }
     notifyKitchen(order, kitchen) {
-        console.log('kitechedn', kitchen);
         kitchen.notifyNewWaitingOrder(order);
     }
     bringBillToTable(order, bill) {
-        console.log('bill', bill);
         return { order, bill };
     }
 }

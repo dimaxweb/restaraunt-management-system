@@ -14,7 +14,8 @@ export class Waiter extends Employee{
     super(id,name);
   }
 
-  createTableOrder(table:Table, menu:Menu, customers: Customer []): Order{
+  createTableOrder(table:Table, menu:Menu): Order{
+    let customers = table.customers;
     let dishes =  new Array<Dish>();
     customers.forEach((customer:Customer)=>{
       dishes = dishes.concat(customer.orderDishes(menu));
@@ -23,12 +24,10 @@ export class Waiter extends Employee{
   }
 
   notifyKitchen(order: Order, kitchen: Kitchen){
-    console.log('kitechedn' , kitchen);
     kitchen.notifyNewWaitingOrder(order);
   }
 
   bringBillToTable(order: Order, bill:Bill) : {order:Order,bill:Bill}{
-    console.log('bill', bill);
     return {order, bill};
   }
 
