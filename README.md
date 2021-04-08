@@ -7,7 +7,8 @@
 * [Use Case ](#use-cases)
 * [Class Diagram](#class-diagram)
 * [Activity Diagrams](#activity-diagrams)
-* [Design Patterns](#patterns)
+* [Design Patterns](#design-patterns)
+* [Testing](#testing)
 
 <p align="center">
     <img src="/media/restaraunt-management.png" alt="Restaurant Management System">
@@ -17,87 +18,75 @@
 
 ### System Requirements
 
-We will focus on the following business goals and  set of requirements while designing the Restaurant Management System:
+We will focus on the following  set of requirements while designing the Restaurant Management System:
 
   
 Requirements 
 
 1. The should have 1 chef at least and should serve clients as fast as possible.
 2. System should be flexible to create different types of  Restaurant without changing the core functionally.
-3. The menu will have different menu sections, containing different menu items.
-4. The waiter should be able to create an order for a table and add meals for each seat.
-5. Each meal can have multiple meal items. Each meal item corresponds to a menu item.
-6. The system should be able to retrieve information about tables currently available to seat walk-in customers.
-7. The system should support the reservation of tables.
-8. The receptionist should be able to search for available tables by date/time and reserve a table.
-9. The system should allow customers to cancel their reservation.
-10. The system should be able to send notifications whenever the reservation time is approaching.
-11. The customers should be able to pay their bills through credit card, check or cash.
-12. Each restaurant branch can have multiple seating arrangements of tables.
+3. The menu will contain different dishes
+4. The waiter should be able to create an order for a table and add dishes for each customer.
+5. The system should place assign table order to available chef as soon as possible
+6. Chef will work on order (the longest dish preparation time) and then will notify kitchen.
+7. The moment kitchen is notified about completed order  -  should notify waiter.
+8. The moment waiter  is notified about completed order  - generate bill and  return both to table
+
 
 ### Use Cases
 
 Here are the main Actors in our system:
 
-**Kitchen:** Mainly responsible for adding and modifying tables and their layout, and creating and canceling table reservations.
-**Waiter:** To take/modify orders.
-**Chef:** To view and work on an order.
-**Customer:** To view and work on an order.
-
-
-
-Here is the use case diagram of our Restaurant Management System:
-
-<p align="center">
-    <img src="/media/rms-use-case-diagram.svg" alt="Restaurant Management System Use Case Diagram">
-    <br />
-    Use Case Diagram for Restaurant Management System
-</p>
-
-### Class Diagram
-<p align="center">
-    <img src="/media-files/rms-class-diagram.png" alt="Restaurant Management System Class Diagram">
-    <br />
-    Class Diagram for Restaurant Management System
-</p>
-
-<p align="center">
-    <img src="/media-files/rms-uml.svg" alt="Restaurant Management System UML">
-    <br />
-    UML for Restaurant Management System
-</p>
+**Kitchen:** Serves as Mediator between Waiters and Available Chefs
+**Waiter:**  Take dishes from the table , create order , create bill . Notify kitchen about new order
+**Chef:** Get notification from kitchen about new orders, prepare order per table and than 
+**Customer:** Order dishes  
+**Table:** Seat many customers - order will be done per table. Receive bill.
 
 ### Activity Diagrams
 
 **Place order:** Any waiter can perform this activity. Here are the steps to place an order:
 
 <p align="center">
-    <img src="/media-files/rms-place-order-activity-diagram.svg" alt="Restaurant Management System Place Order">
+    <img src="/media/flow-diagramm.png" alt="Restaurant Management System Serve Table Order Flow">
     <br />
-    Activity Diagram for Restaurant Management System Place Order
+    Activity Diagram for Restaurant Management System Serve Order Flow
 </p>
 
-**Make a reservation:** Any receptionist can perform this activity. Here are the steps to make a reservation:
+Here is the use case diagram of our Restaurant Management System:
 
 <p align="center">
-    <img src="/media-files/rms-make-reservation-activity-diagram.svg" alt="Restaurant Management System Make Reservation">
+    <img src="/media/deps-diagramm" alt="Restaurant Management System Use Case Diagram">
     <br />
-    Activity Diagram for Restaurant Management System Make Reservation
+    Use Case Diagram for Restaurant Management System
 </p>
 
-**Cancel a reservation:** Any receptionist can perform this activity. Here are the steps to cancel a reservation:
 
+
+### Class Diagram
 <p align="center">
-    <img src="/media-files/rms-cancel-reservation-activity-diagram.svg" alt="Restaurant Management System Cancel Reservation">
+    <img src="/media/deps-diagramm.png" alt="Restaurant Management Dependencies Diagram">
     <br />
-    Activity Diagram for Restaurant Management System Cancel Reservation
+    Dependencies Diagram for Restaurant Management System
 </p>
 
-### Patterns
 
-User cases : 
-1.Waiter notify kitchen about new order
-2. Kitchen  
+### Design Patterns
+We used following design patterns to make our architecture decoupled and adaptable for change
+
+1. Abstract Factory : AbstractRestaurantFactory class
+2. Mediator (Kitchen Class)
+3. EventEmitter/ Observer : provided by node itself , notify listeners about order completed
+
+### Testing 
+We will use approach called Property Based testing in order to create automated test.
+
+Property definition :
+The bill generated for order should contain only dishes ordered for table.
+
+
+
+ 
 
 
 
