@@ -37,7 +37,7 @@ export class Kitchen implements IKitchen{
   private  _waiters:Array<Waiter>;
   private _chefs: Array<Chef>;
   private _menu:Menu;
-  private waitingOrdersQueque:Array<Order>;
+  private waitingOrdersQueque= new Array<Order>();
   onOrderCompleted : OrderCallback;
 
   constructor( ){
@@ -53,7 +53,7 @@ export class Kitchen implements IKitchen{
    public poolWaitingOrders(){
     while(this.waitingOrdersQueque.length){
       let freeChef = this._chefs.find((chef:Chef) => { return chef.status == EmployeeStatus.Free });
-      console.log('free chef' , freeChef);
+      console.log('chef', freeChef ? freeChef.name : 'No free chef');
       if(freeChef){
         let waitingOrder = this.waitingOrdersQueque.pop();
         freeChef.status = EmployeeStatus.Busy;
@@ -69,7 +69,9 @@ export class Kitchen implements IKitchen{
         /**
          * lets wait for free chef
          */
-        setTimeout(this.poolWaitingOrders.bind(this), 1000);
+
+        setTimeout(this.poolWaitingOrders.bind(this), 2000);
+        break;
       }
     }
 

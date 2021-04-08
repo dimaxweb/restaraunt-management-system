@@ -23,7 +23,7 @@ We will focus on the following  set of requirements while designing the Restaura
   
 Requirements 
 
-1. The should have 1 chef at least and should serve clients as fast as possible.
+1. The restaurant should have 1 chef at least and should serve clients as fast as possible.
 2. System should be flexible to create different types of  Restaurant without changing the core functionally.
 3. The menu will contain different dishes.
 4. The waiter should be able to create an order for a table and add dishes for each customer.

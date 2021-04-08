@@ -8,6 +8,7 @@ const util_1 = require("../util");
 class Kitchen {
     constructor() {
         this.waitingOrdersQueque = new Array();
+        this.waitingOrdersQueque = new Array();
         this._menu = new menu_1.Menu(util_1.generateDishes());
     }
     get menu() {
@@ -35,7 +36,7 @@ class Kitchen {
     poolWaitingOrders() {
         while (this.waitingOrdersQueque.length) {
             let freeChef = this._chefs.find((chef) => { return chef.status == employee_status_1.EmployeeStatus.Free; });
-            console.log('free chef', freeChef);
+            console.log('chef', freeChef ? freeChef.name : 'No free chef');
             if (freeChef) {
                 let waitingOrder = this.waitingOrdersQueque.pop();
                 freeChef.status = employee_status_1.EmployeeStatus.Busy;
@@ -48,7 +49,8 @@ class Kitchen {
                 });
             }
             else {
-                setTimeout(this.poolWaitingOrders.bind(this), 1000);
+                setTimeout(this.poolWaitingOrders.bind(this), 2000);
+                break;
             }
         }
     }
