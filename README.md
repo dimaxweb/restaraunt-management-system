@@ -4,7 +4,7 @@
 **We'll cover the following:**
 
 * [System Requirements](#system-requirements)
-* [Use Case Diagram](#use-case-diagram)
+* [Use Case ](#use-cases)
 * [Class Diagram](#class-diagram)
 * [Activity Diagrams](#activity-diagrams)
 * [Design Patterns](#patterns)
@@ -19,16 +19,11 @@
 
 We will focus on the following business goals and  set of requirements while designing the Restaurant Management System:
 
-Business goals :
-1. Restraunt system should serve orders as fast as possible , customer should wait minimal amount of time.
-2. The System should be flexible for change without need for changing the core functionality.
-   So in future if business owner will want to change menu , kitchen type , billing  - will be able to do it without changing the core.  
-
-
+  
 Requirements 
 
-1. The restaurant will have different branches.
-2. Each restaurant branch will have a menu.
+1. The should have 1 chef at least and should serve clients as fast as possible.
+2. System should be flexible to create different types of  Restaurant without changing the core functionally.
 3. The menu will have different menu sections, containing different menu items.
 4. The waiter should be able to create an order for a table and add meals for each seat.
 5. Each meal can have multiple meal items. Each meal item corresponds to a menu item.
@@ -40,7 +35,7 @@ Requirements
 11. The customers should be able to pay their bills through credit card, check or cash.
 12. Each restaurant branch can have multiple seating arrangements of tables.
 
-### Use Case Diagram
+### Use Cases
 
 Here are the main Actors in our system:
 
@@ -48,7 +43,7 @@ Here are the main Actors in our system:
 **Waiter:** To take/modify orders.
 **Chef:** To view and work on an order.
 **Customer:** To view and work on an order.
-**System:** Mainly responsible for sending notifications about table reservations, cancellations, etc.
+
 
 
 Here is the use case diagram of our Restaurant Management System:
