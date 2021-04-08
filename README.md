@@ -4,9 +4,9 @@
 **We'll cover the following:**
 
 * [System Requirements](#system-requirements)
-* [Use Case ](#use-cases)
-* [Class Diagram](#class-diagram)
+* [Use Cases ](#use-cases)
 * [Activity Diagrams](#activity-diagrams)
+* [Class Diagram](#class-diagram)
 * [Design Patterns](#design-patterns)
 * [Testing](#testing)
 
@@ -25,12 +25,12 @@ Requirements
 
 1. The should have 1 chef at least and should serve clients as fast as possible.
 2. System should be flexible to create different types of  Restaurant without changing the core functionally.
-3. The menu will contain different dishes
+3. The menu will contain different dishes.
 4. The waiter should be able to create an order for a table and add dishes for each customer.
-5. The system should place assign table order to available chef as soon as possible
+5. The system should place assign table order to available chef as soon as possible.
 6. Chef will work on order (the longest dish preparation time) and then will notify kitchen.
 7. The moment kitchen is notified about completed order  -  should notify waiter.
-8. The moment waiter  is notified about completed order  - generate bill and  return both to table
+8. The moment waiter is notified about completed order  - generate bill and return order and bill to the table.
 
 
 ### Use Cases
@@ -45,22 +45,13 @@ Here are the main Actors in our system:
 
 ### Activity Diagrams
 
-**Place order:** Any waiter can perform this activity. Here are the steps to place an order:
+**Serve order and generate bill:** Any waiter can perform this activity. Here are the steps to place an order:
 
 <p align="center">
     <img src="/media/flow-diagramm.png" alt="Restaurant Management System Serve Table Order Flow">
     <br />
     Activity Diagram for Restaurant Management System Serve Order Flow
 </p>
-
-Here is the use case diagram of our Restaurant Management System:
-
-<p align="center">
-    <img src="/media/deps-diagramm" alt="Restaurant Management System Use Case Diagram">
-    <br />
-    Use Case Diagram for Restaurant Management System
-</p>
-
 
 
 ### Class Diagram
@@ -74,8 +65,8 @@ Here is the use case diagram of our Restaurant Management System:
 ### Design Patterns
 We used following design patterns to make our architecture decoupled and adaptable for change
 
-1. Abstract Factory : AbstractRestaurantFactory class
-2. Mediator (Kitchen Class)
+1. Abstract Factory : AbstractRestaurantFactory class. 
+2. Mediator  - Kitchen Class , simplify and decouple communication between actors
 3. EventEmitter/ Observer : provided by node itself , notify listeners about order completed
 
 ### Testing 
